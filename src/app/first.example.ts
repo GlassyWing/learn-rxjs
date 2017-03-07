@@ -4,7 +4,9 @@
 
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/fromEvent";
+import "rxjs/add/operator/scan";
 
 let button = document.querySelector('button');
 Observable.fromEvent(button, "click")
-  .subscribe(()=>console.log("Clicked!"));
+  .scan<number>(count => count + 1, 0)
+  .subscribe(count => console.log(`Clicked ${count} times`));
